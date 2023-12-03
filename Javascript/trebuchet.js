@@ -7,21 +7,13 @@
 
 function sumCalibrationValues(amendedStrings) {
     let calibrationValues = [];
-    for(i=0;i<amendedStrings.length;i++) {
-        let twoDigitNum;
-        let digits = amendedStrings[i].match(/\d+/g);
-        if(digits.length > 1) {
-            let firstDigit = digits.shift();
-            let lastDigit = digits.pop();
-            twoDigitNum = Number(firstDigit + lastDigit);
-            calibrationValues.push(twoDigitNum);
-        } else if(digits.length===1) {
-            twoDigitNum = Number(digits[0] + digits[0]);
-            calibrationValues.push(twoDigitNum);
-        }
-    }
+    amendedStrings.forEach(str => {
+        str = str.match(/\d+/g);
+        str = Number(str[0] + str[str.length - 1]);
+        calibrationValues.push(str);
+    });
     console.log(calibrationValues);
-    calibrationValues = calibrationValues.reduce((acc, cv) => acc + cv);
+    calibrationValues = calibrationValues.reduce((pv, cv) => pv + cv);
     console.log(calibrationValues);
 }
 
